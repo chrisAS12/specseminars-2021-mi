@@ -22,11 +22,13 @@ def removePunctuation(allText):
 
 
 def removeDoc(text):
+    correctTextList = []
     for i,e in enumerate(text):
-        if e.startswith("<") or "<" in e or "<doc" in e or e.find('source') > 0:
-            del text[i]
+        if e.startswith("<") or "<" in e or "<doc" in e or e.find('source') > 0 or e.find('</') > 0 or e.find('<') > 0:
             print("deleted ", i ,  "   ", e)
-    return text
+        else:
+            correctTextList.append(e)
+    return correctTextList
 
 
 def saveText(text, fileName):
@@ -34,13 +36,13 @@ def saveText(text, fileName):
         file.writelines("% s\n" % line for line in text)
         file.close()
 
-file = "data\80_percent.txt"
-saveFileName = "data\80_percent_FORMATTED.txt"
+file = "data\LVK2013.txt"
+saveFileName = "data\LVK2013_FORMATTED.txt"
 text = get_text(file)
 print(text)
 if text != (-1):
-    #saveText(removeDoc(text), saveFileName)
+    saveText(removeDoc(text), saveFileName)
 
-    text = removeDoc(text[:1000])
-    for e in text:
-        print(e)
+    #text = removeDoc(text[:1000])
+    #for e in text:
+    #    print(e)
