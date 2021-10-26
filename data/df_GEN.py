@@ -34,6 +34,10 @@ def save_text(text, file_name):
         file.writelines("% s\n" % line for line in text)
         file.close()
 
+def save_text_string(text, file_name):
+    with open(file_name, "w") as file:
+        file.write(text)
+        file.close()
 
 def format_text_manually():
     file = "data\LVK2013.txt"
@@ -42,7 +46,3 @@ def format_text_manually():
     print(text)
     if text != (-1):
         save_text(remove_unnecessary_elements(text), save_file_name)
-
-        #text = removeDoc(text[:1000])
-        #for e in text:
-        #    print(e)
