@@ -25,3 +25,33 @@ A dropout layer.
 A dense layer.
 
 https://colah.github.io/posts/2015-08-Understanding-LSTMs/
+
+
+
+
+The most widely used predictive models are:
+
+Decision trees:
+Decision trees are a simple, but powerful form of multiple variable analysis. They are produced by algorithms that identify various ways of splitting data into branch-like segments. Decision trees partition data into subsets based on categories of input variables, helping you to understand someone’s path of decisions.
+Regression (linear and logistic)
+Regression is one of the most popular methods in statistics. Regression analysis estimates relationships among variables, finding key patterns in large and diverse data sets and how they relate to each other.
+Neural networks
+Patterned after the operation of neuronsin the human brain, neural networks (also called artificial neural networks) are a variety of deep learning technologies. They’re typically used to solve complex pattern recognition problems – and are incredibly useful for analysing large data sets. They are great at handling nonlinear relationships in data – and work well when certain variables are unknown
+Other classifiers:
+
+Time Series Algorithms: Time series algorithms sequentially plot data and are useful for forecasting continuous values over time.
+Clustering Algorithms: Clustering algorithms organise data into groups whose members are similar.
+Outlier Detection Algorithms: Outlier detection algorithms focus on anomaly detection, identifying items, events or observations that do not conform to an expected pattern or standard within a data set.
+Ensemble Models: Ensemble models use multiple machine learning algorithms to obtain better predictive performance than what could be obtained from one algorithm alone.
+Factor Analysis: Factor analysis is a method used to describe variability and aims to find independent latent variables.
+Naïve Bayes: The Naïve Bayes classifier allows us to predict a class/category based on a given set of features, using probability.
+Support vector machines: Support vector machines are supervised machine learning techniques that use associated learning algorithms to analyse data and recognise patterns.
+
+
+GPT, BERT
+
+Līdzsvarotais korpuss
+
+embertia
+
+http://www.korpuss.lv/
