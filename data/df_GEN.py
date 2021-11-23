@@ -1,11 +1,14 @@
 import os
 
-def get_text(file_name):
+
+def get_text(file_name, split):
     if not os.path.isfile(file_name):
-        print(" no file found! " , file_name)
+        print(" no file found! ", file_name)
     else:
         f = open(file_name, encoding="utf-8")
-        text = f.read().split("\n")
+        text = f.read()
+        if split == True:
+            text = text.split("\n")
         return text
     return -1
 
@@ -21,9 +24,9 @@ def remove_punctuation(allText):
 
 def remove_unnecessary_elements(text):
     correct_text_list = []
-    for i,e in enumerate(text):
+    for i, e in enumerate(text):
         if e.startswith("<") or "<" in e or "<doc" in e or e.find('source') > 0 or e.find('</') > 0 or e.find('<') > 0:
-            print("deleted ", i ,  "   ", e)
+            print("deleted ", i,  "   ", e)
         else:
             correct_text_list.append(e)
     return correct_text_list
@@ -34,10 +37,12 @@ def save_text(text, file_name):
         file.writelines("% s\n" % line for line in text)
         file.close()
 
+
 def save_text_string(text, file_name):
     with open(file_name, "w") as file:
         file.write(text)
         file.close()
+
 
 def format_text_manually():
     file = "data\LVK2013.txt"

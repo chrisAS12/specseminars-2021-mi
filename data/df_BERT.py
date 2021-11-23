@@ -2,6 +2,13 @@
 
 from df_GEN import save_text_string, get_text
 
+def splitSentences(file):
+    text = "".join(get_text(file, False))
+    stuff_to_endline_after = ['.','!','.']
+    for u in stuff_to_endline_after:
+        text = text.replace(u, u+" \n")
+    return text
+
 def create_vocabulary(file):
     text = get_text(file)
     text_string = "".join(text)
@@ -14,14 +21,22 @@ def create_vocabulary(file):
 
 files = ["data\LVK2013_FORMATTED.txt" , "data\TRAIN_SET_FORMATTED.txt"]
 
-word_list = []
-for i in files:
-    word_list.append(create_vocabulary(i))
+
+#word_list = []
+#for i in files:
+#    word_list.append(create_vocabulary(i))
+#
+#text = ""
+#for i in range(len(files)):
+#    for w in word_list[i]:
+#        if not len(w) > 25:
+#            text += w + " "
+#
+#save_text_string(text, "word_list_v7.txt")
 
 text = ""
-for i in range(len(files)):
-    for w in word_list[i]:
-        if not len(w) > 25:
-            text += w + " "
+for i in files:
+    text += splitSentences(i)
+print(text)
 
-save_text_string(text, "word_list_v6.txt")
+save_text_string(text, "sentences_seperated_by_lines.txt")
