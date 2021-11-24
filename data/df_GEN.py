@@ -1,6 +1,5 @@
 import os
 
-
 def get_text(file_name, split):
     if not os.path.isfile(file_name):
         print(" no file found! ", file_name)
