@@ -7,7 +7,7 @@ import tqdm
 from transformers import AdamW
 
 sentences_path = "data/sentences_seperated_by_lines_format.txt"
-word_list_path = "data\word_list_v6.txt"
+word_list_path = "data\words_list.txt"
 pretrained_path = 'C:/Users/chris/Desktop/specseminars/models/tokenizer'
 
 def getParameters():

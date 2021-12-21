@@ -1,13 +1,12 @@
-from os import error
 from transformers import pipeline
 from tokenizers import Tokenizer
 
-for retry in range(400):
-    try:
-        my_tokenizer = Tokenizer.from_file("tokenizer_load")
-        break
-    except:
-        print("failed ", retry)
-        print(error)
+def classification():
+    pipeClassification = pipeline("text-classification")
+    print(pipeClassification("Checking how positive this thingy ma jig is. :D"))
     
-fill = pipeline('fill-mask', model='mybert_0', tokenizer=my_tokenizer)
+def bertModel():
+    my_tokenizer = Tokenizer.from_file("tokenizer_load")    
+    fill = pipeline('fill-mask', model='mybert_0', tokenizer=my_tokenizer)
+    
+bertModel()
