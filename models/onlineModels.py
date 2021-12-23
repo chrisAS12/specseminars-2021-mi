@@ -1,22 +1,47 @@
-from transformers import BertTokenizer, BertModel, BertForMaskedLM
-from transformers import pipeline
-from transformers import AutoTokenizer, AutoModelForMaskedLM
+from transformers import BertTokenizer, BertModel, BertForMaskedLM, pipeline, AutoTokenizer, AutoModelForMaskedLM
 
 tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
 
 model = AutoModelForMaskedLM.from_pretrained("bert-base-uncased")
 
-def predict(model, tokenizer):
-    fill_mask = pipeline(
-        "fill-mask",
-        model=model,
-        tokenizer=tokenizer
-    )
-    print('Fill blank: ')
-    print(fill_mask(f"The University of Latvia is so {fill_mask.tokenizer.mask_token}."))
+def predict(sentence, symbol_to_replace, model, tokenizer):
+    try:
+        fill_mask = pipeline(
+            "fill-mask",
+            model=model,
+            tokenizer=tokenizer
+        )
+        sentence = sentence.replace(symbol_to_replace, "[MASK]")
+        #return fill_mask(sentence)[1]['token_str']
+        #return fill_mask(sentence)
+        return fill_mask(sentence)[1]['sequence']
+    except:
+        print("Add only one symbol to replace, please.")
+        return -1
 
-    print('Fill blank: ')
-    print(fill_mask(f"This course is really {fill_mask.tokenizer.mask_token}."))
 
-print('predicting ...')
-predict(model, tokenizer)
+
+def full_prediction(sentence, symbol_to_replace):
+    print(sentence)
+    print(f"In the sentence above, we can replace {symbol_to_replace} to this: ")
+    print('\033[0m',"\033[1m",predict(sentence,symbol_to_replace, model, tokenizer),'\033[0m','\033[92m');
+
+
+def test_cases():
+    full_prediction("The University of Latvia is so *.",'*')
+    full_prediction("This course is so -!", '-')
+
+def make_text_green():
+    print('\033[92m')
+
+make_text_green()
+test_cases()
+
+while(True):
+    sentence = input("Enter your sentence and add one symbol you will replace with a word later: ")
+    if(sentence is None or sentence == '' or sentence == '-1'):
+        break
+    symbol = input("Symbol to replace: ")
+    full_prediction(sentence, symbol)
+    print("Enter -1 to break!")
+    

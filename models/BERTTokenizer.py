@@ -36,9 +36,12 @@ def generate_tokenizer_ByteLevelBPETokenizer():
     #'[PAD', '[UNK]', '[CLS]', '[SEP]', '[MASK]'
     #
     # "<s>", "<pad>", "</s>", "<unk>", "<mask>",
+    return tokenizer
 
 
 def main():
-    tokenizer = generate_tokenizer_BertWordPieceTokenizer()
-    os.mkdir('./bert_tokens_3')
-    tokenizer.save_model('./bert_tokens_3', 'bert_tokens')
+    tokenizer = generate_tokenizer_ByteLevelBPETokenizer()
+    os.mkdir('./bert_byte_0')
+    tokenizer.save_model('./bert_byte_0', 'bert_tokens')
+
+#main()
