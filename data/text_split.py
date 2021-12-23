@@ -9,15 +9,15 @@ new_path_variable = "splitted_data_v"
 
 f = open(file_path, encoding="utf-8")
 text = f.read()
-sentencesList = text.split("\n")
-howManyFiles = 5
-sentencesBeforeNewFile = round(len(sentencesList) / 5)
+sentences_list = text.split("\n")
+file_count = 5
+sentences_in_one_file = round(len(sentences_list) / 5)
 
 currentText = ""
-for i in range(len(sentencesList)): 
-    currentText += sentencesList[i]+"\n"
-    if i != 0 and i % sentencesBeforeNewFile == 0:
-        save_text_string(currentText, str(new_path_variable +  str(i/sentencesBeforeNewFile)))
+for i in range(len(sentences_list)): 
+    currentText += sentences_list[i]+"\n"
+    if i != 0 and i % sentences_in_one_file == 0:
+        save_text_string(currentText, str(new_path_variable +  str(i/sentences_in_one_file)))
         currentText = ""
         print("saved file 1")
 save_text_string(currentText, str(new_path_variable + "0.0"))        
