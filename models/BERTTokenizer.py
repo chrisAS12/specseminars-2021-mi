@@ -1,5 +1,5 @@
 from tokenizers import BertWordPieceTokenizer, ByteLevelBPETokenizer
-
+import transformers
 import os
 
 sentences_path = "data\sentences_seperated_by_lines_format.txt"
@@ -41,7 +41,8 @@ def generate_tokenizer_ByteLevelBPETokenizer():
 
 def main():
     tokenizer = generate_tokenizer_ByteLevelBPETokenizer()
-    os.mkdir('./bert_byte_0')
-    tokenizer.save_model('./bert_byte_0', 'bert_tokens')
+    #os.mkdir('./bert_byte_1')
+    #tokenizer.save_model('./bert_byte_0', 'bert_tokens')
+    tokenizer.save('bert_byte_1')
 
-#main()
+main()

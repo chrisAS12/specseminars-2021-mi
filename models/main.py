@@ -14,9 +14,11 @@ def test_tokenizer(tokenizer, fill_mask):
 
 def predict():
     #tokenizer = BertTokenizer.from_pretrained('bert_tokens_1')
-    #tokenizer = AutoTokenizer.from_pretrained("chrisAS12/specseminars")
+    tokenizer = AutoTokenizer.from_pretrained("chrisAS12/specseminars/bert_byte_0")
     #tokenizer = generate_tokenizer_BertWordPieceTokenizer()
-    tokenizer = generate_tokenizer_ByteLevelBPETokenizer()
+    #tokenizer = generate_tokenizer_ByteLevelBPETokenizer()
+    #tokenizer = AutoTokenizer.from_pretrained("bert_byte_0")
+
     
     fill_mask = pipeline('fill-mask', model='mybert_0', tokenizer=tokenizer)
     #test_tokenizer(tokenizer, fill_mask)
