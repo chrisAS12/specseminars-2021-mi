@@ -9,7 +9,7 @@ import os
 sentences_path = "data/sentences_seperated_by_lines_format.txt"
 word_list_path = "data\words_list.txt"
 pretrained_path = 'C:\\Users\\chris\\Desktop\\specseminars-2021-mi\\tokenizer_1'
-dataset_path = 'dataset.pt'
+dataset_path = 'dataset_new_1.pt'
 
 def getParameters():
     f = open(word_list_path, encoding="utf-8")
@@ -72,7 +72,7 @@ torch.save(dataset, dataset_path)
 loader = torch.utils.data.DataLoader(dataset, batch_size=16, shuffle=True)
 
 config = RobertaConfig(
-    vocab_size=size, 
+    vocab_size=30522, 
     num_attention_heads=12,
     num_hidden_layers=6
     )
