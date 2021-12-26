@@ -1,14 +1,15 @@
 import pandas as pd
 from tokenizers import ByteLevelBPETokenizer
-import transformers
-from transformers import RobertaForMaskedLM, RobertaConfig
+from BERTTokenizer import generate_tokenizer_BertWordPieceTokenizer, generate_tokenizer_ByteLevelBPETokenizer
+from transformers import RobertaForMaskedLM, RobertaConfig, RobertaTokenizer,AdamW 
 import torch
 import tqdm
-from transformers import AdamW
+import os
 
 sentences_path = "data/sentences_seperated_by_lines_format.txt"
 word_list_path = "data\words_list.txt"
-pretrained_path = 'C:/Users/chris/Desktop/specseminars/models/tokenizer'
+pretrained_path = 'C:\\Users\\chris\\Desktop\\specseminars-2021-mi\\tokenizer_1'
+dataset_path = 'dataset.pt'
 
 def getParameters():
     f = open(word_list_path, encoding="utf-8")
@@ -18,17 +19,9 @@ def getParameters():
     text = f.read().split("\n")
     return vocab, size, text
 
-def createTokenizer():
-    tokenizer = ByteLevelBPETokenizer()
-    tokenizer.train(files=sentences_path, vocab_size=size, min_frequency=2,
-                special_tokens=['<s>', '<pad>', '</s>', '<unk>', '<mask>'])
-    
 def saveTokenizer(tokenizer):
     tokenizer.save_model("/tokenizer")
 
-def loadPretrainedRoberta():
-    robertaTokenizer = transformers.RobertaTokenizer.from_pretrained(pretrained_path, max_len=256)
-    return robertaTokenizer
 
 def createBatch(roberta):
     with open(sentences_path, 'r', encoding='utf-8') as file:
@@ -59,18 +52,23 @@ def create_encodings(batch):
     return encodings
 
 def load_dataset():
-    dataset = torch.load('dataset.pt', encoding='ascii')
+    dataset = torch.load(dataset_path, encoding='ascii')
     return dataset
     
 vocab, size, text = getParameters()
 
-roberta = loadPretrainedRoberta()
+#tokenizer = generate_tokenizer_ByteLevelBPETokenizer()
+#os.mkdir('./tokenizer_1')
+#tokenizer.save_model('./tokenizer_1', 'bert_tokens')
 
-#batch = createBatch(roberta)
-#dataset = Dataset(create_encodings(batch))
-#torch.save(dataset, "dataset.pt")
+roberta = RobertaTokenizer.from_pretrained(pretrained_path, max_len=512)
 
-dataset = load_dataset()
+batch = createBatch(roberta)
+dataset = Dataset(create_encodings(batch))
+torch.save(dataset, dataset_path)
+
+#dataset = load_dataset()
+
 loader = torch.utils.data.DataLoader(dataset, batch_size=16, shuffle=True)
 
 config = RobertaConfig(
@@ -82,23 +80,23 @@ model = RobertaForMaskedLM(config)
 
 #print(model)
 
-#device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
-#model.to(device)
+device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
+model.to(device)
 model.train()
 optimizer = AdamW(model.parameters(), lr=1e-4)
 
-print("starting trainin")
+print("starting traininggg")
 epochs = 2
 torch.cuda.empty_cache()
 for epoch in range(epochs):
     for i in loader:
         optimizer.zero_grad()
-        #input_ids = i['input_ids'].to(device)
-        #attention_mask = i['attention_mask'].to(device)
-        #labels = i['labels'].to(device)
-        input_ids = i['input_ids']
-        attention_mask = i['attention_mask']
-        labels = i['labels']
+        input_ids = i['input_ids'].to(device)
+        attention_mask = i['attention_mask'].to(device)
+        labels = i['labels'].to(device)
+        #input_ids = i['input_ids']
+        #attention_mask = i['attention_mask']
+        #labels = i['labels']
         outputs = model(input_ids, attention_mask=attention_mask,
                         labels=labels)
         loss = outputs.loss
@@ -106,6 +104,6 @@ for epoch in range(epochs):
         optimizer.step()
         print(f'Epoch {epoch}')
         print(loss.item())
-        model.save_pretrained('./mybert_' + str(epoch))
+        model.save_pretrained('./mybert_' + str(epoch) + '_1')
         print("saved!")
         

@@ -11,8 +11,8 @@ This was built on PyTorch. The training data I used was publicly available. It c
 
 # How to use this.
 
-Install Git then	
+Install Git, then:	
 
 ``` git clone https://github.com/chrisAS12/specseminars-2021-mi ```
 
-Afterward, install all the requirements which are mentioned in the file "requiremenets.txt" using pip. 
+Afterwards, install all the requirements which are mentioned in the file "requiremenets.txt" using pip. 
