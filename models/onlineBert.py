@@ -1,4 +1,4 @@
-from transformers import BertTokenizer, BertModel, BertForMaskedLM, pipeline, AutoTokenizer, AutoModelForMaskedLM
+from transformers import pipeline, AutoTokenizer, AutoModelForMaskedLM
 
 tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
 

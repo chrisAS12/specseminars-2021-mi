@@ -16,3 +16,5 @@ Install Git, then:
 ``` git clone https://github.com/chrisAS12/specseminars-2021-mi ```
 
 Afterwards, install all the requirements which are mentioned in the file "requiremenets.txt" using pip. 
+
+### Then you can run ``` main.py ``` and see how it works! :) 
