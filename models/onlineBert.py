@@ -12,8 +12,6 @@ def predict(sentence, symbol_to_replace, model, tokenizer):
             tokenizer=tokenizer
         )
         sentence = sentence.replace(symbol_to_replace, "[MASK]")
-        #return fill_mask(sentence)[1]['token_str']
-        #return fill_mask(sentence)
         return fill_mask(sentence)[1]['sequence']
     except:
         print("Add only one symbol to replace, please.")

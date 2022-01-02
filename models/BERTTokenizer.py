@@ -53,13 +53,6 @@ def save_tokenizer(tokenizer):
         }
     json.dump(tokenizer_cfg, f)
 
-#def main():
-    #tokenizer = generate_tokenizer_BertWordPieceTokenizer()
-    #os.mkdir('./bert_byte_4')
-    #tokenizer.save_model('./bert_byte_4')
-    #tokenizer.save('bert_byte_1')
-
-#main()
 def generate_new_tokenizer():
     tokenizer = generate_tokenizer_BertWordPieceTokenizer()
     save_tokenizer(tokenizer)
