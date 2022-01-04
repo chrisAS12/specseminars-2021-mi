@@ -10,8 +10,8 @@ with open(word_list_path) as file:
 print("Vocab size: ", len(vocabulary))
 
 
-model_path = "tokenizer_30522_default_vocab"
-max_length = 512
+model_path = "tokenizer_30522_default_vocab_truncation_1024"
+max_length = 1024
 
 def generate_tokenizer_BertWordPieceTokenizer():
     tokenizer = BertWordPieceTokenizer(
@@ -29,8 +29,8 @@ def generate_tokenizer_BertWordPieceTokenizer():
 def generate_tokenizer_ByteLevelBPETokenizer():
     tokenizer = ByteLevelBPETokenizer()
 
-    tokenizer.train(files=sentences_path, vocab_size=30522, min_frequency=2, special_tokens=[
-        "[PAD]", "[UNK]", "[CLS]", "[SEP]", "[MASK]"
+    tokenizer.train(files=sentences_path, vocab_size=30522, add_special_tokens=True, truncation=True,
+                min_frequency=2, special_tokens=["[PAD]", "[UNK]", "[CLS]", "[SEP]", "[MASK]"
     ])
     return tokenizer
 
@@ -51,9 +51,10 @@ def save_tokenizer(tokenizer):
             "model_max_length": max_length,
             "max_len": max_length,
         }
-    json.dump(tokenizer_cfg, f)
+        json.dump(tokenizer_cfg, f)
+
 
 def generate_new_tokenizer():
     tokenizer = generate_tokenizer_BertWordPieceTokenizer()
     save_tokenizer(tokenizer)
-#generate_new_tokenizer()
+generate_new_tokenizer()

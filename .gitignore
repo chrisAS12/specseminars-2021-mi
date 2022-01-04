@@ -1,3 +1,6 @@
 dataset.pt
 dataset_new.pt
 models/tempCodeRunnerFile.py
+data/cached_nsp_BertTokenizer_1024_sentences_seperated_by_lines_format.txt
+data/cached_nsp_BertTokenizer_512_sentences_seperated_by_lines_format.txt
+data/cached_nsp_BertTokenizer_559_sentences_seperated_by_lines_format.txt
