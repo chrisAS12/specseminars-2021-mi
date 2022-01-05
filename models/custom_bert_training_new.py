@@ -20,7 +20,7 @@ print("data_colator")
 data_collator = DataCollatorForLanguageModeling(
     tokenizer=tokenizer_default,
     mlm=True,
-    mlm_probability=0.15
+    mlm_probability=0.10
 )
 
 print("training_args")
@@ -29,7 +29,9 @@ training_args = TrainingArguments(
     overwrite_output_dir=True,
     num_train_epochs=3,
     save_steps=5000,
-    save_total_limit=2,
+    per_device_train_batch_size = 16,
+    per_device_eval_batch_size=64,   
+    #save_total_limit=2,
     learning_rate=2e-5,
     prediction_loss_only=True,
     logging_dir='logs',
