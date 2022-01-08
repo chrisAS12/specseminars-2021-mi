@@ -26,7 +26,8 @@ Simbols, kuru mainīt: *
 viens * divi
 Šajā tekstā mēs izmainīsim * uz šo:
   viens divi 
-Viss minējums:  [{'sequence': 'viens, divi', 'score': 0.005533328279852867, 'token': 16, 'token_str': ','}, {'sequence': 'viens divi', 'score': 0.0010569952428340912, 'token': 2, 'token_str': '</s>'}, {'sequence': 'viensas divi', 'score': 0.0010153661714866757, 'token': 266, 'token_str': 'as'}, {'sequence': 'viensa divi', 'score': 0.0009730682941153646, 'token': 69, 'token_str': 'a'}, {'sequence': 'viensT divi', 'score': 0.0008624795009382069, 'token': 56, 'token_str': 'T'}] ```
+Viss minējums:  [{'sequence': 'viens, divi', 'score': 0.005533328279852867, 'token': 16, 'token_str': ','}, {'sequence': 'viens divi', 'score': 0.0010569952428340912, 'token': 2, 'token_str': '</s>'}, {'sequence': 'viensas divi', 'score': 0.0010153661714866757, 'token': 266, 'token_str': 'as'}, {'sequence': 'viensa divi', 'score': 0.0009730682941153646, 'token': 69, 'token_str': 'a'}, {'sequence': 'viensT divi', 'score': 0.0008624795009382069, 'token': 56, 'token_str': 'T'}] 
+```
 ## Conclusion
 After finishing this project, which took me a lot of hours, I see a lot of space for improvement. The input data could have been formatted much better. The model wasn't great, since it needs a lot of training input and computer resources that can be allocated. During the programming of this model, I learned a lot of information about NLP and how machine learning works in general, especially BERT and RoBERTa. This was great! 
 
