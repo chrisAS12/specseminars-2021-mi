@@ -5,7 +5,7 @@ sentences_path = "data/sentences_seperated_by_lines_format.txt"
 word_list_path = "data\words_list.txt"
 pretrained_path = 'C:\\Users\\chris\\Desktop\\specseminars-2021-mi\\tokenizer_1'
 
-dataset_path = 'dataset_new_1.pt'
+dataset_path = 'dataset_new_2.pt'
 
 def getParameters():
     f = open(word_list_path, encoding="utf-8")
@@ -22,7 +22,7 @@ def saveTokenizer(tokenizer):
 def createBatch(roberta):
     with open(sentences_path, 'r', encoding='utf-8') as file:
         lines = file.read().split('\n')
-    batch = roberta(lines, max_length=512, padding='max_length', truncation=True)
+    batch = roberta(lines, max_length=128, padding='max_length', truncation=True)
     return batch
 
 class Dataset(torch.utils.data.Dataset):
@@ -57,7 +57,7 @@ vocab, size, text = getParameters()
 #os.mkdir('./tokenizer_1')
 #tokenizer.save_model('./tokenizer_1', 'bert_tokens')
 
-roberta = RobertaTokenizer.from_pretrained(pretrained_path, max_len=512)
+roberta = RobertaTokenizer.from_pretrained(pretrained_path, max_len=128)
 
 batch = createBatch(roberta)
 dataset = Dataset(create_encodings(batch))
@@ -96,6 +96,6 @@ for epoch in range(epochs):
         optimizer.step()
         print(f'Epoch {epoch}')
         print(loss.item())
-        model.save_pretrained('./mybert_' + str(epoch) + '_1')
-        print("saved!")
+    model.save_pretrained('./mybert_' + str(epoch) + '_1')
+    print("saved!")    
         
