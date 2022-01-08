@@ -1,4 +1,4 @@
-from bert_0 import predict
+from my_bert import predict
 
 def full_prediction(sentence, symbol_to_replace):
     print(sentence)
