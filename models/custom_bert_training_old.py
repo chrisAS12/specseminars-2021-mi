@@ -22,7 +22,7 @@ def saveTokenizer(tokenizer):
 def createBatch(roberta):
     with open(sentences_path, 'r', encoding='utf-8') as file:
         lines = file.read().split('\n')
-    batch = roberta(lines, max_length=256, padding='max_length', truncation=True)
+    batch = roberta(lines, max_length=512, padding='max_length', truncation=True)
     return batch
 
 class Dataset(torch.utils.data.Dataset):
@@ -62,7 +62,7 @@ roberta = RobertaTokenizer.from_pretrained(pretrained_path, max_len=512)
 batch = createBatch(roberta)
 dataset = Dataset(create_encodings(batch))
 torch.save(dataset, dataset_path)
-
+print(dataset)
 #dataset = load_dataset()
 
 loader = torch.utils.data.DataLoader(dataset, batch_size=16, shuffle=True)
@@ -81,7 +81,6 @@ model.to(device)
 model.train()
 optimizer = AdamW(model.parameters(), lr=1e-4)
 
-print("starting traininggg")
 epochs = 2
 torch.cuda.empty_cache()
 for epoch in range(epochs):

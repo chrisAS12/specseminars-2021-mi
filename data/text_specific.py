@@ -6,7 +6,7 @@ def splitSentences(file):
     text = "".join(get_text(file, False))
     stuff_to_endline_after = ['.','!','?']
     for u in stuff_to_endline_after:
-        text = text.replace(u, u+" \n")   
+        text = text.replace(u, u +" \n")   
     return removeBlankLines(text)
 
 def create_vocabulary(file):
@@ -27,9 +27,6 @@ def removeBlankLines(text):
         if not e.isspace() and any(c.isalpha() for c in e):
             newText += e.lstrip(" ") + "\n"
     return newText
-
-
-
 
 #word_list = []
 #for i in files:

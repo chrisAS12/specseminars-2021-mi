@@ -1,10 +1,8 @@
 import os
 #os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
 from tokenizers import Tokenizer
-import torch
-from transformers import BertTokenizerFast, BertConfig, BertForPreTraining
-from transformers import LineByLineTextDataset, DataCollatorForLanguageModeling, Trainer, TrainingArguments
-from datasets import load_dataset
+from transformers import BertTokenizerFast, BertConfig, BertForPreTraining, DataCollatorForWholeWordMask
+from transformers import LineByLineTextDataset, Trainer, TrainingArguments
 import json
 
 
@@ -13,7 +11,11 @@ model_path = "tokenizer_30522_default_vocab_truncation_1024"
 tokenizer_default = BertTokenizerFast.from_pretrained(
     model_path, do_lower_case=True)
 
-config = BertConfig()
+config = BertConfig(
+    vocab_size=30522,
+    num_attention_heads=12,
+    num_hidden_layers=6
+)
 model = BertForPreTraining(config)
 
 #dataset = load_dataset("cc_news", split="train")
@@ -25,18 +27,24 @@ dataset = LineByLineTextDataset(
 )
 
 
-
 #train_dataset = dataset["train"].map(encode_with_truncation, batched=True)
 #train_dataset.set_format(type="torch", columns=["input_ids", "attention_mask"])
 
-print(dataset)
+print(dataset[0])
+print(dataset[1])
+print(dataset[2])
 
 print("data_colator")
-data_collator = DataCollatorForLanguageModeling(
+# data_collator = DataCollatorForLanguageModeling(
+#    tokenizer=tokenizer_default,
+#    mlm=True,
+#    mlm_probability=0.2
+# )
+
+data_collator = DataCollatorForWholeWordMask(
     tokenizer=tokenizer_default,
-    pad_to_multiple_of=2,
     mlm=True,
-    mlm_probability=0.2
+    mlm_probability=0.15,
 )
 
 print("training_args")

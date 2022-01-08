@@ -57,4 +57,4 @@ def save_tokenizer(tokenizer):
 def generate_new_tokenizer():
     tokenizer = generate_tokenizer_BertWordPieceTokenizer()
     save_tokenizer(tokenizer)
-generate_new_tokenizer()
+#generate_new_tokenizer()

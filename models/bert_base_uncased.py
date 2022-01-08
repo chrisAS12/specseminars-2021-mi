@@ -17,13 +17,10 @@ def predict(sentence, symbol_to_replace, model, tokenizer):
         print("Add only one symbol to replace, please.")
         return -1
 
-
-
 def full_prediction(sentence, symbol_to_replace):
     print(sentence)
     print(f"In the sentence above, we can replace {symbol_to_replace} to this: ")
     print('\033[0m',"\033[1m",predict(sentence,symbol_to_replace, model, tokenizer),'\033[0m','\033[92m');
-
 
 def test_cases():
     full_prediction("The University of Latvia is so *.",'*')
@@ -33,7 +30,6 @@ def make_text_green():
     print('\033[92m')
 
 make_text_green()
-test_cases()
 
 while(True):
     sentence = input("Enter your sentence and add one symbol you will replace with a word later: ")

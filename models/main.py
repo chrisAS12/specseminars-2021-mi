@@ -1,6 +1,5 @@
 from bert_0 import predict
 
-
 def full_prediction(sentence, symbol_to_replace):
     print(sentence)
     print(f"Šajā tekstā mēs izmainīsim {symbol_to_replace} uz šo: ")
