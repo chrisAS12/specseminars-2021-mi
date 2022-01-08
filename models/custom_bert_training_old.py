@@ -3,9 +3,9 @@ import torch
 
 sentences_path = "data/sentences_seperated_by_lines_format.txt"
 word_list_path = "data\words_list.txt"
-pretrained_path = 'C:\\Users\\chris\\Desktop\\specseminars-2021-mi\\tokenizer_1'
+pretrained_path = 'tokenizer_roberta'
 
-dataset_path = 'dataset_new_2.pt'
+dataset_path = 'dataset_new_4.pt'
 
 def getParameters():
     f = open(word_list_path, encoding="utf-8")
@@ -59,13 +59,13 @@ vocab, size, text = getParameters()
 
 roberta = RobertaTokenizer.from_pretrained(pretrained_path, max_len=128)
 
-batch = createBatch(roberta)
-dataset = Dataset(create_encodings(batch))
-torch.save(dataset, dataset_path)
-print(dataset)
-#dataset = load_dataset()
+#batch = createBatch(roberta)
+#dataset = Dataset(create_encodings(batch))
+#torch.save(dataset, dataset_path)
+#print(dataset)
+dataset = load_dataset()
 
-loader = torch.utils.data.DataLoader(dataset, batch_size=16, shuffle=True)
+loader = torch.utils.data.DataLoader(dataset, batch_size=128, shuffle=True)
 
 config = RobertaConfig(
     vocab_size=30522, 
@@ -84,7 +84,9 @@ optimizer = AdamW(model.parameters(), lr=1e-4)
 epochs = 2
 torch.cuda.empty_cache()
 for epoch in range(epochs):
+    x = 0
     for i in loader:
+        x += 1
         optimizer.zero_grad()
         input_ids = i['input_ids'].to(device)
         attention_mask = i['attention_mask'].to(device)
@@ -96,6 +98,9 @@ for epoch in range(epochs):
         optimizer.step()
         print(f'Epoch {epoch}')
         print(loss.item())
-    model.save_pretrained('./mybert_' + str(epoch) + '_1')
+        if x%5 == 0:
+            model.save_pretrained('./mybert_' + str(epoch) + '_' + str(x))
+            print("saved!")  
+    model.save_pretrained('./mybert_' + str(epoch) + '_x')
     print("saved!")    
         

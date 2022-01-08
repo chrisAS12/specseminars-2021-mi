@@ -3,7 +3,9 @@ from bert_0 import predict
 def full_prediction(sentence, symbol_to_replace):
     print(sentence)
     print(f"Šajā tekstā mēs izmainīsim {symbol_to_replace} uz šo: ")
-    print('\033[0m',"\033[1m",predict(sentence,symbol_to_replace),'\033[0m')
+    prediction = predict(sentence,symbol_to_replace)
+    print('\033[0m',"\033[1m",prediction[1]['sequence'],'\033[0m')
+    print('Viss minējums: ', prediction)
     make_text_green()
 
 def make_text_green():
